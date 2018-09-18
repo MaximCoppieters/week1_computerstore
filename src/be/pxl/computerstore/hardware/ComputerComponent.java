@@ -48,8 +48,23 @@ public class ComputerComponent {
         this.price = price;
     }
 
+    public String getArticleNumber() {
+        return articleNumber;
+    }
+
     @Override
     public String toString() {
         return String.format("%s (%s)", name, articleNumber);
+    }
+
+    public String getFullDescription() {
+        return seperateWithEquals("ArticleNumber", articleNumber) +
+                seperateWithEquals("Vendor", vendor) +
+                seperateWithEquals("Name", name) +
+                seperateWithEquals("Price", Double.toString(price));
+    }
+
+    protected String seperateWithEquals(String propertyName, String propertyValue) {
+        return propertyName + " = " + propertyValue;
     }
 }

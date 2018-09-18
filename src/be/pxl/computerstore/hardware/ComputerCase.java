@@ -26,4 +26,12 @@ public class ComputerCase extends ComputerComponent {
         this.weight = weight;
     }
 
+    @Override
+    public String getFullDescription() {
+        return super.getFullDescription() +
+                seperateWithEquals("Width", Double.toString(dimension.getWidth())) +
+                seperateWithEquals("Height", Double.toString(dimension.getHeight())) +
+                seperateWithEquals("Depth", Double.toString(dimension.getDepth())) +
+                seperateWithEquals("Weight", Double.toString(weight));
+    }
 }
