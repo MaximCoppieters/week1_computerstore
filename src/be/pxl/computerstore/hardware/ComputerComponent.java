@@ -3,10 +3,10 @@ package be.pxl.computerstore.hardware;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ComputerComponent {
-    final String vendor;
-    final String name;
-    double price;
-    final String articleNumber;
+    private final String vendor;
+    private final String name;
+    private double price;
+    private final String articleNumber;
 
     private static final ThreadLocalRandom generator = ThreadLocalRandom.current();
 
@@ -75,6 +75,6 @@ public class ComputerComponent {
     }
 
     protected String seperateWithEquals(String propertyName, String propertyValue) {
-        return propertyName + " = " + propertyValue;
+        return propertyName + " = " + propertyValue + System.lineSeparator();
     }
 }

@@ -12,26 +12,40 @@ public class ComputerSystem implements Computable {
     private ComputerCase computerCase;
     
     private Peripheral[] peripherals;
-    private int peripheralIndex = 0;
+    private int numberOfPeripherals;
 
     public ComputerSystem() {
         peripherals = new Peripheral[MAX_PERIPHERAL];
     }
 
     public void addPeripheral(Peripheral peripheral) {
-        if (peripheralIndex < MAX_PERIPHERAL) {
-            peripherals[peripheralIndex] = peripheral;
-        } else {
-            throw new TooManyPeripheralsException();
+        int nextIndex = findNextPeripheralIndex();
+
+        peripherals[nextIndex] = peripheral;
+        numberOfPeripherals++;
+    }
+
+    private int findNextPeripheralIndex() {
+        for (int i=0; i < MAX_PERIPHERAL; i++) {
+            if (peripherals[i] == null) {
+                return i;
+            }
         }
+        throw new TooManyPeripheralsException();
     }
 
     public void removePeripheral(String articleNumber) {
-        throw new NotImplementedException();
+        for (int i=0; i < MAX_PERIPHERAL; i++) {
+            if (peripherals[i] ==  null) continue;
+            if (peripherals[i].getArticleNumber().equals(articleNumber)) {
+                peripherals[i] = null;
+                numberOfPeripherals--;
+            }
+        }
     }
 
     public int getNumberOfPeripherals() {
-        return peripheralIndex;
+        return numberOfPeripherals;
     }
 
     public Processor getProcessor() {
@@ -68,11 +82,20 @@ public class ComputerSystem implements Computable {
 
     @Override
     public double totalPriceExcl() {
-        double totalPrice = processor.price + hardDisk.price + computerCase.price;
+        double totalPrice = addComponentPriceIfPresent(processor);
+        totalPrice += addComponentPriceIfPresent(hardDisk);
+        totalPrice += addComponentPriceIfPresent(computerCase);
 
-        for (int i=0; i < peripheralIndex; i++) {
-            totalPrice += peripherals[i].price;
+        for (int i=0; i < MAX_PERIPHERAL; i++) {
+            totalPrice += addComponentPriceIfPresent(peripherals[i]);
         }
         return totalPrice;
+    }
+
+    private double addComponentPriceIfPresent(ComputerComponent component) {
+        if (component != null) {
+            return component.getPrice();
+        }
+        return 0;
     }
 }

@@ -29,9 +29,9 @@ public class ComputerCase extends ComputerComponent {
     @Override
     public String getFullDescription() {
         return super.getFullDescription() +
-                seperateWithEquals("Width", Double.toString(dimension.getWidth()) + "mm") +
-                seperateWithEquals("Height", Double.toString(dimension.getHeight()) + "mm") +
-                seperateWithEquals("Depth", Double.toString(dimension.getDepth()) + "mm") +
+                seperateWithEquals("Width", Integer.toString((int)dimension.getWidth()) + "mm") +
+                seperateWithEquals("Height", Integer.toString((int)dimension.getHeight()) + "mm") +
+                seperateWithEquals("Depth", Integer.toString((int)dimension.getDepth()) + "mm") +
                 seperateWithEquals("Weight", Double.toString(weight) + "kg");
     }
 }

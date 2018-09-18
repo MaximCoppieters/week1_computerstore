@@ -12,7 +12,7 @@ public class Processor extends ComputerComponent {
     @Override
     public String getFullDescription() {
         return super.getFullDescription()
-                + seperateWithEquals("Clock speed", Double.toString(clockspeed));
+                + seperateWithEquals("Clock speed", Double.toString(clockspeed) + "GHz");
     }
 
     public double getClockspeed() {
