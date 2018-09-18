@@ -6,6 +6,6 @@ public interface Computable {
 	double totalPriceExcl();
 	
 	default double totalPriceIncl() {
-		return Math.round(totalPriceExcl() * (1 + BTW / 100.0) * 100) / 100.0;
+		return totalPriceExcl() * (1 + BTW / 100.0) * 100 / 100.0;
 	}
 }
