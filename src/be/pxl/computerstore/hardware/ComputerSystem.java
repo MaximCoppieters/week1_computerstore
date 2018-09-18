@@ -21,9 +21,9 @@ public class ComputerSystem implements Computable {
     public void addPeripheral(Peripheral peripheral) {
         if (peripheralIndex < MAX_PERIPHERAL) {
             peripherals[peripheralIndex] = peripheral;
+        } else {
+            throw new TooManyPeripheralsException();
         }
-
-        throw new TooManyPeripheralsException();
     }
 
     public void removePeripheral(String articleNumber) {
@@ -70,7 +70,7 @@ public class ComputerSystem implements Computable {
     public double totalPriceExcl() {
         double totalPrice = processor.price + hardDisk.price + computerCase.price;
 
-        for (int i=0; i <= peripheralIndex; i++) {
+        for (int i=0; i < peripheralIndex; i++) {
             totalPrice += peripherals[i].price;
         }
         return totalPrice;

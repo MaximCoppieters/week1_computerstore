@@ -9,6 +9,6 @@ public abstract class Peripheral extends ComputerComponent {
     @Override
     public String toString() {
         return String.format("%s %s (%s)",
-                getClass().getName(), name, articleNumber);
+                getClass().getSimpleName(), name, articleNumber);
     }
 }

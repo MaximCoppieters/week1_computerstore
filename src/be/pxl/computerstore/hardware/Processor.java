@@ -6,13 +6,13 @@ public class Processor extends ComputerComponent {
 
     public Processor(String vendor, String name, double price, double clockspeed) {
         super(vendor, name, price);
-        this.clockspeed = clockspeed;
+        setClockspeed(clockspeed);
     }
 
     @Override
     public String getFullDescription() {
         return super.getFullDescription()
-                + seperateWithEquals("Clock Speed", Double.toString(clockspeed));
+                + seperateWithEquals("Clock speed", Double.toString(clockspeed));
     }
 
     public double getClockspeed() {
@@ -20,6 +20,6 @@ public class Processor extends ComputerComponent {
     }
 
     public void setClockspeed(double clockspeed) {
-        this.clockspeed = clockspeed;
+        this.clockspeed = Math.max(MIN_CLOCKSPEED, clockspeed);
     }
 }
