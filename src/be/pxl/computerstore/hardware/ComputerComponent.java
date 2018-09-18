@@ -21,15 +21,25 @@ public class ComputerComponent {
         StringBuilder articleNumberBuilder = new StringBuilder();
 
         if (vendor.length() < 3) {
-            articleNumberBuilder.append(String.format("%3s", vendor).replace(" ", "X"));
+            String vendorPadded = vendor + getAmountOfCharacter('X', 3 - vendor.length());
+
+            articleNumberBuilder.append(vendorPadded);
         } else {
             articleNumberBuilder.append(vendor.toUpperCase().substring(0,3));
         }
 
         articleNumberBuilder.append("-");
-        articleNumberBuilder.append(String.format("%05d", generator.nextInt()));
+        articleNumberBuilder.append(String.format("%05d", generator.nextInt(99999)));
 
         return articleNumberBuilder.toString();
+    }
+
+    private String getAmountOfCharacter(char character, int amount) {
+        char[] characters = new char[amount];
+        for (int i=0; i < amount; i++) {
+            characters[i] = character;
+        }
+        return new String(characters);
     }
 
     public String getVendor() {
